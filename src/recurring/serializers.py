@@ -1,6 +1,5 @@
-from gift import serializers
 from .models import *
-
+from rest_framework import serializers
 class MandateSerializer(serializers.ModelSerializer):
     """
     A serializer for the Mandate model.

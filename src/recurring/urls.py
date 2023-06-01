@@ -7,3 +7,8 @@ router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r"mandate", CreateDebitMandateViewSet, basename="mandate")
 router.register(r"transaction", DirectDebitTransactionViewSet, basename="transaction")
+
+urlpatterns = [
+   
+]
+urlpatterns += router.urls
