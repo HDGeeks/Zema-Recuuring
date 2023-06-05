@@ -29,3 +29,9 @@ class DirectDebitTransactionSerializer(serializers.ModelSerializer):
             "request_timestamp",
             "status",
         )
+
+
+class DirectDebitMandateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DirectDebitMandate
+        fields = "__all__"
