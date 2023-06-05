@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse
 def api_root(request, format=None):
     return Response(
         {
-            "mandate": reverse("mandate-list", request=request, format=format),
+            "create-mandate": reverse("mandate-list", request=request, format=format),
             "transaction": reverse("transaction-list", request=request, format=format),
             "admin-site": reverse("admin:login", request=request, format=format),
             # doc

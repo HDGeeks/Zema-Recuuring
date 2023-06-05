@@ -4,6 +4,7 @@ from recurring.serializers import DirectDebitMandateSerializer
 from rest_framework import request
 import requests
 import environ
+from rest_framework.response import Response
 
 # Initialise environment variables
 env = environ.Env()
@@ -46,7 +47,7 @@ class CreateDebitMandateViewSet(ModelViewSet):
         #Send XML as request
         response = requests.post(env("b2c_api"), data=xml)
 
-        return
+        return Response(response)
 
 
 def create_direct_debit_mandate_xml(
