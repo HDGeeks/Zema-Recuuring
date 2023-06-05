@@ -2,12 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+
 class Abstarct(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
+
 
 class Mandate(Abstarct):
     """
@@ -21,6 +23,7 @@ class Mandate(Abstarct):
     class Meta:
         verbose_name = "Direct Debit Mandate"
         verbose_name_plural = "Direct Debit Mandates"
+
 
 class DirectDebitMandate(Abstarct):
     payer_reference_number = models.CharField(max_length=255)
@@ -41,7 +44,8 @@ class DirectDebitMandate(Abstarct):
 
     def __str__(self):
         return self.payer_reference_number
-    
+
+
 class DirectDebitTransaction(Abstarct):
     """
     A model representing a direct debit transaction.
