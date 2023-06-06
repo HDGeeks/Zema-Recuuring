@@ -47,4 +47,4 @@ RUN pip install gunicorn
 EXPOSE 8000
 
 # run gunicorn with the app:app application
-CMD gunicorn --bind 0.0.0.0:8000 app:app
+CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 src/core.wsgi:application
