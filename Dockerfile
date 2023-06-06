@@ -19,7 +19,7 @@ WORKDIR /app/src
 # #installs the requirements
 RUN pip install -r ../requirements.txt
 EXPOSE 8000
-CMD python manage.py runserver 0.0.0.0:8000
+# CMD python manage.py runserver 0.0.0.0:8000
 
 
 # FROM python:3.9-slim
@@ -64,4 +64,4 @@ CMD python manage.py runserver 0.0.0.0:8000
 # ENV PYTHONDONTWRITEBYTECODE 1
 # ENV PYTHONUNBUFFERED 1
 
-# CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
+CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
