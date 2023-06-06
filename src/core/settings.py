@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-!$o2w#7sx*8zex(w$7j1b(fh3t&h3^fje4@lo-f3hh7ogows$_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -91,6 +91,8 @@ ROOT_URLCONF = "core.urls"
 #     },
 # ]
 ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['196.189.126.147']
+HOST = '196.189.126.147:80'
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -120,6 +122,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql_psycopg2",
