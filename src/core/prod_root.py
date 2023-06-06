@@ -17,5 +17,6 @@ def prod_root(request, format=None):
     "admin-site": "http://196.189.126.147/admin/login/",
     "swagger-api-doc": "http://196.189.126.147/swagger/",
     "redoc-api-doc": "http://196.189.126.147/redoc/"
+    "redoc-api-doc-test": "http://196.189.126.147/redoc/"
 }
     )
