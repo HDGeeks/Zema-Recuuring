@@ -91,8 +91,7 @@ ROOT_URLCONF = "core.urls"
 #     },
 # ]
 ALLOWED_HOSTS = ["*"]
-ALLOWED_HOSTS = ['196.189.126.147']
-HOST = '196.189.126.147:80'
+
 
 TEMPLATES = [
     {
