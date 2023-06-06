@@ -1,4 +1,6 @@
-version: '3.8'
+# @format
+
+version: "3.8"
 
 services:
   db:
@@ -30,7 +32,7 @@ services:
       dockerfile: Dockerfile
     #command: sh -c "until pg_isready -h db -p 5432; do echo Waiting for PostgreSQL; sleep 1; done && python src/manage.py migrate --noinput && python src/manage.py runserver 0.0.0.0:8000"
     ports:
-      - 8000:8000
+      - 80:8000
     environment:
       - DB_HOST=db
     volumes:
@@ -38,4 +40,3 @@ services:
 
 volumes:
   pgdata:
-

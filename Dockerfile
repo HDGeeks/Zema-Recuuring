@@ -13,13 +13,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # switch to the app directory so that everything runs from here
 COPY . /app/
 COPY requirements.txt /app/
-WORKDIR /app/
+WORKDIR /app/src
 
 
 # #installs the requirements
-RUN pip install -r requirements.txt
+RUN pip install -r ../requirements.txt
 EXPOSE 8000
-CMD python ./src/manage.py runserver 0.0.0.0:8000
+CMD python manage.py runserver 0.0.0.0:8000
 
 
 # FROM python:3.9-slim
