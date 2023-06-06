@@ -1,25 +1,25 @@
-# # base image
-# FROM python:3.9-slim
+# base image
+FROM python:3.9-slim
 
-# #maintainer
-# LABEL Author="Daniel Tesfai"
-
-
-# # The environment variable ensures that the python
-# # output to the terminal without buffering it first
-# ENV PYTHONUNBUFFERED 1
-# ENV PYTHONDONTWRITEBYTECODE 1
-
-# # switch to the app directory so that everything runs from here
-# COPY . /app/
-# COPY requirements.txt /app/
-# WORKDIR /app/
+#maintainer
+LABEL Author="Daniel Tesfai"
 
 
-# # #installs the requirements
-# RUN pip install -r requirements.txt
-# EXPOSE 8000
-# CMD python ./src/manage.py runserver 0.0.0.0:8000
+# The environment variable ensures that the python
+# output to the terminal without buffering it first
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+# switch to the app directory so that everything runs from here
+COPY . /app/
+COPY requirements.txt /app/
+WORKDIR /app/
+
+
+# #installs the requirements
+RUN pip install -r requirements.txt
+EXPOSE 8000
+CMD python ./src/manage.py runserver 0.0.0.0:8000
 
 
 # FROM python:3.9-slim
@@ -52,16 +52,16 @@
 
 
 
-FROM python:3.8-slim
+# FROM python:3.8-slim
 
-COPY ./requirements.txt /requirements.txt
-RUN pip install -r requirements.txt
-RUN pip install gunicorn
-COPY ./src /app
-WORKDIR /app
+# COPY ./requirements.txt /requirements.txt
+# RUN pip install -r requirements.txt
+# RUN pip install gunicorn
+# COPY ./src /app
+# WORKDIR /app
 
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
 
-CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
+# CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
