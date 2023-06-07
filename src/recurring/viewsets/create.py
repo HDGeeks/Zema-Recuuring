@@ -91,7 +91,7 @@ def create_direct_debit_mandate_xml(
           </req:Initiator>
           <req:ReceiverParty>
             <req:IdentifierType>1</req:IdentifierType>
-            <req:Identifier>{env('IdentifierType11')}</req:Identifier>
+            <req:Identifier>{env('IdentifierType14')}</req:Identifier>
           </req:ReceiverParty>
         </req:Identity>
         <req:CreateDirectDebitMandateByPayerRequest>
