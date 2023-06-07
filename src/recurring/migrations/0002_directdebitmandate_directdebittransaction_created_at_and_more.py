@@ -4,55 +4,62 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('recurring', '0001_initial'),
+        ("recurring", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='DirectDebitMandate',
+            name="DirectDebitMandate",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('payer_reference_number', models.CharField(max_length=255)),
-                ('agreed_tc', models.IntegerField()),
-                ('payee_account_name', models.CharField(max_length=255)),
-                ('payer_account_name', models.CharField(max_length=255)),
-                ('first_payment_date', models.DateField()),
-                ('frequency', models.CharField(max_length=2)),
-                ('start_range_of_days', models.IntegerField()),
-                ('end_range_of_days', models.IntegerField()),
-                ('expiry_date', models.DateField()),
-                ('identifier_type', models.IntegerField()),
-                ('identifier_value', models.CharField(max_length=255)),
-                ('security_credential', models.CharField(max_length=255)),
-                ('receiver_identifier_type', models.IntegerField()),
-                ('receiver_identifier', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                ("payer_reference_number", models.CharField(max_length=255)),
+                ("agreed_tc", models.IntegerField()),
+                ("payee_account_name", models.CharField(max_length=255)),
+                ("payer_account_name", models.CharField(max_length=255)),
+                ("first_payment_date", models.DateField()),
+                ("frequency", models.CharField(max_length=2)),
+                ("start_range_of_days", models.IntegerField()),
+                ("end_range_of_days", models.IntegerField()),
+                ("expiry_date", models.DateField()),
+                ("identifier_type", models.IntegerField()),
+                ("identifier_value", models.CharField(max_length=255)),
+                ("security_credential", models.CharField(max_length=255)),
+                ("receiver_identifier_type", models.IntegerField()),
+                ("receiver_identifier", models.CharField(max_length=255)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.AddField(
-            model_name='directdebittransaction',
-            name='created_at',
+            model_name="directdebittransaction",
+            name="created_at",
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
-            model_name='directdebittransaction',
-            name='updated_at',
+            model_name="directdebittransaction",
+            name="updated_at",
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
-            model_name='mandate',
-            name='created_at',
+            model_name="mandate",
+            name="created_at",
             field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
-            model_name='mandate',
-            name='updated_at',
+            model_name="mandate",
+            name="updated_at",
             field=models.DateTimeField(auto_now=True),
         ),
     ]

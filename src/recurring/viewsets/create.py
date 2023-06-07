@@ -1,3 +1,4 @@
+import time
 from rest_framework.viewsets import ModelViewSet
 from recurring.models import DirectDebitMandate
 from recurring.serializers import DirectDebitMandateSerializer
@@ -29,7 +30,7 @@ class CreateDebitMandateViewSet(ModelViewSet):
         end_range_of_days = request.data.get("end_range_of_days")
         expiry_date = request.data.get("expiry_date")
 
-           # Use helper function to modify XML
+        # Use helper function to modify XML
         xml = create_direct_debit_mandate_xml(
             payee_identifier_type,
             payee_identifier_value,
@@ -41,11 +42,11 @@ class CreateDebitMandateViewSet(ModelViewSet):
             frequency,
             start_range_of_days,
             end_range_of_days,
-            expiry_date
+            expiry_date,
         )
 
-        #Send XML as request
-        response = requests.post(env("b2c_api"), data=xml)
+        # Send XML as request
+        response = requests.post(env("url"), data=xml)
 
         return Response(response)
 
@@ -74,23 +75,23 @@ def create_direct_debit_mandate_xml(
         <req:ConversationID>AG_20130129T102103</req:ConversationID>
         <req:Caller>
           <req:CallerType>2</req:CallerType>
-          <req:ThirdPartyID>POS_Broker</req:ThirdPartyID>
-          <req:Password>B1YNY8GylVo=</req:Password>
+          <req:ThirdPartyID>{env('IdentifierType14')}</req:ThirdPartyID>
+          <req:Password>{env('password')}</req:Password>
           <req:ResultURL>http://10.71.109.150:8888/mockResultBinding</req:ResultURL>
         </req:Caller>
         <req:KeyOwner>1</req:KeyOwner>
-        <req:Timestamp>20130402152345</req:Timestamp>
+        <req:Timestamp>{createTimeStamp()}</req:Timestamp>
       </req:Header>
       <req:Body>
         <req:Identity>
           <req:Initiator>
             <req:IdentifierType>14</req:IdentifierType>
-            <req:Identifier>AAA</req:Identifier>
-            <req:SecurityCredential>kMhIAmNE4h8=</req:SecurityCredential>
+            <req:Identifier>{env('IdentifierType14')}</req:Identifier>
+            <req:SecurityCredential>{env('SecurityCredential14')}</req:SecurityCredential>
           </req:Initiator>
           <req:ReceiverParty>
             <req:IdentifierType>1</req:IdentifierType>
-            <req:Identifier>{payee_identifier_value}</req:Identifier>
+            <req:Identifier>{env('IdentifierType11')}</req:Identifier>
           </req:ReceiverParty>
         </req:Identity>
         <req:CreateDirectDebitMandateByPayerRequest>
@@ -116,3 +117,7 @@ def create_direct_debit_mandate_xml(
 </soapenv:Envelope>"""
 
     return xml
+
+
+def createTimeStamp():
+    return str(int(time.time()))

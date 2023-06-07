@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .views import  DirectDebitTransactionViewSet
+from .views import DirectDebitTransactionViewSet
 from recurring.viewsets.create import CreateDebitMandateViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
