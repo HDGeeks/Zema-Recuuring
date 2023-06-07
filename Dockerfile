@@ -20,7 +20,8 @@ WORKDIR /app/src
 RUN pip install -r ../requirements.txt
 EXPOSE 8000
 # CMD python manage.py runserver 0.0.0.0:8000
-CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
+#CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 core.wsgi:application
+CMD exec gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 0 --log-level=debug --access-logfile=/logs/access.log --error-logfile=/logs/error.log core.wsgi:application
 
 # FROM python:3.9-slim
 
