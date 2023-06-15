@@ -7,6 +7,11 @@ import requests
 import environ
 from rest_framework.response import Response
 
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+import logging
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
@@ -30,6 +35,8 @@ class CreateDebitMandateViewSet(ModelViewSet):
         end_range_of_days = request.data.get("end_range_of_days")
         expiry_date = request.data.get("expiry_date")
 
+
+
         # Use helper function to modify XML
         xml = create_direct_debit_mandate_xml(
             payee_identifier_type,
@@ -45,10 +52,39 @@ class CreateDebitMandateViewSet(ModelViewSet):
             expiry_date,
         )
 
-        # Send XML as request
-        response = requests.post(env("url"), data=xml)
+        # Set up logging
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.INFO)
 
-        return Response(response)
+        # Define retry mechanism
+        retry_strategy = Retry(
+            total=3,
+            backoff_factor=1,
+            status_forcelist=[500, 502, 503, 504],
+        )
+       # Create HTTP adapter with retry mechanism
+        http_adapter = HTTPAdapter(max_retries=retry_strategy)
+
+        # Create session with HTTP adapter
+        session = requests.Session()
+        session.mount("http://", http_adapter)
+        session.mount("https://", http_adapter)
+
+
+
+        # Send XML as request
+        # Send XML as request with retry mechanism
+        for i in range(3):  # retry up to 3 times
+            try:
+                response = session.post(env("url"), data=xml)
+                logger.info(f"Status code: {response.status_code}")
+                if response.status_code == 200:
+                    break  # success, exit loop
+            except Exception as e:
+                logger.error(f"Error: {e}")
+
+
+
 
 
 def create_direct_debit_mandate_xml(
