@@ -55,6 +55,26 @@ class CreateDebitMandateViewSet(ModelViewSet):
         # Set up logging
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.INFO)
+        
+        # Define log file name and location
+        log_file = "my_log_file.txt"
+
+        # Define file handler to write log messages to file
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(logging.INFO)
+
+        # Define console handler to print log messages to console
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+
+        # Define log message format
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        file_handler.setFormatter(formatter)
+        console_handler.setFormatter(formatter)
+
+        # Add handlers to logger
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
 
         # Define retry mechanism
         retry_strategy = Retry(
